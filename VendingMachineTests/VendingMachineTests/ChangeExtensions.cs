@@ -10,8 +10,8 @@ namespace VendingMachineTests
 	{
 		public static IEnumerable<Change> Collapse(this IEnumerable<Change> change)
 		{			
-            return change.GroupBy(c => c.Coin)
-                    .Select(group => new Change(group.Key, group.Sum(c=>c.Quantity)));
+            return change.GroupBy(c=>c.Coin)
+                    .Select(group=>new Change(group.Key, group.Sum(c=>c.Quantity)));
 		}
 	}
 }

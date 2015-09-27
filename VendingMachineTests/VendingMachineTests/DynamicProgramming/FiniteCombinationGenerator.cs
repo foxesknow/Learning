@@ -23,9 +23,9 @@ namespace VendingMachineTests.DynamicProgramming
 
         private void Recurse(int amount, int index, Stack<Change> coins, Action<IEnumerable<Change>> emit)
         {
-            if (amount == 0)
+            if(amount == 0)
             {
-                emit(coins);
+                if(coins.Count!=0) emit(coins);
                 return;
             }
 

@@ -25,7 +25,7 @@ namespace VendingMachineTests.DynamicProgramming
         {
             if(amount==0)
             {
-                emit(coins);
+                if(coins.Count!=0) emit(coins);
                 return;
             }
 

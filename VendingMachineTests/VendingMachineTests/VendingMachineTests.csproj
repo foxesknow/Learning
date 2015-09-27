@@ -61,7 +61,7 @@
     <Compile Include="IChangeCalculator.cs" />
     <Compile Include="ICombintationGenerator.cs" />
     <Compile Include="INumberOfCombinations.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="TestInfiniteCombinationGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
