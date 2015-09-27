@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Change.cs" />
+    <Compile Include="ChangeExtensions.cs" />
     <Compile Include="DynamicProgramming\InfiniteCombinationGenerator.cs" />
     <Compile Include="DynamicProgramming\FiniteNumberOfCombinations.cs" />
     <Compile Include="DynamicProgramming\FiniteCombinationGenerator.cs" />
