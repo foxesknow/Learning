@@ -8,7 +8,7 @@ namespace VendingMachineTests.Greedy
 {
 	class InfiniteChangeCalculator : IChangeCalculator
 	{
-		private readonly int[] m_Coins={1,2,5,10,20,50,100};
+		private readonly int[] m_Coins={1, 2, 5, 10, 20, 50, 100};
 
 		public IList<Change> CalculateChange(int amount)
 		{
