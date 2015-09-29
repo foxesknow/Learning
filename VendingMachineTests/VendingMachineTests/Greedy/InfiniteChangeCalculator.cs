@@ -15,7 +15,7 @@ namespace VendingMachineTests.Greedy
 			var change=new List<Change>();
 
             int index=FindStartIndex(amount);
-            while(amount!=0)
+            while(amount!=0 && index>=0)
             {
                 if(amount>=m_Coins[index])
                 {

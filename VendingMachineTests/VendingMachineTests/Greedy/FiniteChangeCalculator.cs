@@ -10,6 +10,11 @@ namespace VendingMachineTests.Greedy
     {
         private readonly Change[] m_Coins;
 
+		public FiniteChangeCalculator(params Change[] coins)
+		{
+			m_Coins=coins.OrderBy(change=>change.Coin).ToArray();
+		}
+
         public FiniteChangeCalculator(IList<Change> coins)
         {
             m_Coins=coins.OrderBy(change=>change.Coin).ToArray();
@@ -20,7 +25,7 @@ namespace VendingMachineTests.Greedy
             var change=new List<Change>();
 
             int index=FindStartIndex(amount);
-            while(amount!=0)
+            while(amount!=0 && index>=0)
             {
                 if(amount>=m_Coins[index].Coin)
                 {

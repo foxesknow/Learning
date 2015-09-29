@@ -31,8 +31,8 @@ namespace VendingMachineTests.DynamicProgramming
 
             if(amount<0 || index < 0) return;
 
-            // It's the sum of the solutions without the current coin : Count(amount, index - 1)
-            // plus the sum of the solutions minus the current amount and including the current coin
+            // It's the combination of solutions without the current coin : Recurse(amount, index - 1)
+            // and the combination of the solutions minus the current amount and including the current coin
             Recurse(amount,index-1,coins,emit);
 
             coins.Push(new Change(m_Coins[index], 1));
