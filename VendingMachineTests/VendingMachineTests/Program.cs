@@ -12,7 +12,7 @@ namespace VendingMachineTests
 	{
 		public static void Main(string[] args)
 		{
-			FiniteCombinationGenerator_CalcChange();
+			InfiniteCombinationGenerator_CalcChange();
 		}
 
 		private static void FiniteCombinationGenerator_CalcChange()
@@ -27,6 +27,17 @@ namespace VendingMachineTests
                     new Change(1,8),
                 }
             );
+            generator.Generate(60,change=>
+			{
+				var text=string.Join(", ", change.Collapse());
+				Console.WriteLine("{0} coins => {1}",change.NumberOfCoins(),text);
+			});
+        }
+
+		private static void InfiniteCombinationGenerator_CalcChange()
+        {
+            var generator=new InfiniteCombinationGenerator(1,2,5,10,20,50,100);
+
             generator.Generate(60,change=>
 			{
 				var text=string.Join(", ", change.Collapse());
