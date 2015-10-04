@@ -8,9 +8,9 @@ namespace VendingMachineTests.DynamicProgramming
 {
 	class FiniteCombinationGenerator : ICombintationGenerator
 	{
-		private readonly int[] m_Coins;
+		private readonly Change[] m_Coins;
 
-        public FiniteCombinationGenerator(params int[] coins)
+        public FiniteCombinationGenerator(params Change[] coins)
         {
             m_Coins=coins;
         }
@@ -35,9 +35,17 @@ namespace VendingMachineTests.DynamicProgramming
             // and the combination of the solutions minus the current amount and including the current coin
             Recurse(amount, index-1, coins, emit);
 
-            coins.Push(new Change(m_Coins[index], 1));
-            Recurse(amount-m_Coins[index], index, coins, emit);
-            coins.Pop();
+			if(m_Coins[index].Quantity>0)
+			{
+				var temp=m_Coins[index];
+                m_Coins[index]=new Change(temp.Coin,Math.Max(0, temp.Quantity-1));
+
+				coins.Push(new Change(m_Coins[index].Coin, 1));
+				Recurse(amount-m_Coins[index].Coin, index, coins, emit);
+				
+				m_Coins[index]=temp;
+				coins.Pop();
+			}
         }
 	}
 }

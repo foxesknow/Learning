@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E6AE8017-0F32-4CE7-AAAC-39C601D545F6}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VendingMachineTests</RootNamespace>
     <AssemblyName>VendingMachineTests</AssemblyName>
@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>VendingMachineTests.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
@@ -61,6 +64,7 @@
     <Compile Include="IChangeCalculator.cs" />
     <Compile Include="ICombintationGenerator.cs" />
     <Compile Include="INumberOfCombinations.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="TestFiniteChangeCalculator.cs" />
     <Compile Include="TestInfiniteChangeCalculator.cs" />
     <Compile Include="TestInfiniteCombinationGenerator.cs" />

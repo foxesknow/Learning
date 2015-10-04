@@ -20,5 +20,11 @@ namespace VendingMachineTests
 			int sum=change.Sum(c=>c.Coin*c.Quantity);
 			return sum;
 		}
+
+		public static int NumberOfCoins(this IEnumerable<Change> change)
+		{
+			int count=change.Sum(c=>c.Quantity);
+			return count;
+		}
 	}
 }
