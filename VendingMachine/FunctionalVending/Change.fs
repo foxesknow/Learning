@@ -10,7 +10,7 @@ module Change =
     let totalValue change =
         change.Denomination * change.Quantity
 
-    let (++) change quantity =
+    let addQuantity quantity change =
         let newQuantity = change.Quantity + quantity
 
         if(newQuantity < 1) then
@@ -18,7 +18,7 @@ module Change =
         else
             {change with Quantity = newQuantity}
 
-    let (+++) change changeToAdd =
+    let addChange changeToAdd change =
         if change.Denomination <> changeToAdd.Denomination then
             invalidArg "changeToAdd" "denominations do not match"
         else
@@ -33,6 +33,9 @@ module Change =
             | x::xs -> loop (acc + totalValue x) xs
 
         loop 0 changes
+
+    let toString change =
+        sprintf "%d * %d" change.Quantity change.Denomination
 
 
 

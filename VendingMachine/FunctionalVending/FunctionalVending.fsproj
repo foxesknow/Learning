@@ -58,7 +58,8 @@
     <None Include="App.config" />
     <Content Include="packages.config" />
     <Compile Include="Change.fs" />
-    <Compile Include="Program.fs" />
+    <Compile Include="VendingMachine.fs" />
+    <Compile Include="zzzProgram.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
