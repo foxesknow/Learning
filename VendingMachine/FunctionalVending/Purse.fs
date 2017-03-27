@@ -1,13 +1,14 @@
 ﻿namespace FunctionalVending
 
-module VendingMachine =
+module Purse =
 
-    type T = {MoneyInMachine : Change.T list}
+    type T = {Money : Change.T list}
 
     let create =
-        {MoneyInMachine = []}
+        {Money = []}
 
-    let add (change : Change.T) (machine : T) =
+    let add (change : Change.T) (purse : T) =
+        // Keep the change ordered, with the highest denominations at the front of the list
         let rec loop (changes : Change.T list) = 
             match changes with
             | [] -> [change]
@@ -15,6 +16,6 @@ module VendingMachine =
             | x :: xs when change.Denomination > x.Denomination -> change :: x :: xs
             | x :: xs -> x :: (loop xs)
 
-        let newMoney = loop machine.MoneyInMachine
-        {MoneyInMachine = newMoney}
+        let newMoney = loop purse.Money
+        {Money = newMoney}
 
