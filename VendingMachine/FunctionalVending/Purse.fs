@@ -19,3 +19,6 @@ module Purse =
         let newMoney = loop purse.Money
         {Money = newMoney}
 
+    let totalValue purse =
+        Change.totalValueOf purse.Money
+

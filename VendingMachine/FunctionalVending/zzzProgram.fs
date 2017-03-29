@@ -16,7 +16,7 @@ module Program =
         printfn ""
         printfn "Calculating change"
 
-        let change = GreedyAlgorithm.calculate 77 purse
+        let change = GreedyAlgorithm.calculate 84 purse
 
         match change with
         | Some purse -> purse.Money |> List.iter (fun c -> printfn "%s" (Change.toString c))

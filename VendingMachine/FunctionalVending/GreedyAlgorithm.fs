@@ -16,7 +16,7 @@ module GreedyAlgorithm =
                     let coinsToTake = min x.Quantity (changeRequired / x.Denomination)
                     let changeHere = Change.create x.Denomination coinsToTake
                     let amountToRemove = coinsToTake * x.Denomination                    
-                    loop (changeRequired - amountToRemove) {purse with Money = xs} {soFar with Money = changeHere :: soFar.Money}
+                    loop (changeRequired - amountToRemove) {purse with Money = xs} (Purse.add changeHere soFar)
 
                 | x :: xs -> loop changeRequired {purse with Money = xs} soFar 
 
