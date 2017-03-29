@@ -11,7 +11,13 @@ module Program =
                     |> Purse.add (Change.create 5 2)
                     |> Purse.add (Change.create 2 3)
 
-        purse.Money |> List.iter (fun c -> printfn "%s" (Change.toString c))
+        let purse2 =    Purse.create
+                        |> Purse.add (Change.create 5 2)
+                        |> Purse.add (Change.create 2 1)
+                        |> Purse.add (Change.create 1 3)
+
+        //purse.Money |> List.iter (fun c -> printfn "%s" (Change.toString c))
+        (Purse.combine purse purse2).Money |> List.iter (fun c -> printfn "%s" (Change.toString c))
 
         printfn ""
         printfn "Calculating change"

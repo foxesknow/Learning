@@ -19,6 +19,10 @@ module Purse =
         let newMoney = loop purse.Money
         {Money = newMoney}
 
+    // Adds 2 purses together
+    let combine purse1 purse2 = 
+        List.fold (fun purse change -> add change purse) purse2 purse1.Money
+
     let totalValue purse =
         Change.totalValueOf purse.Money
 
