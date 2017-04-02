@@ -12,6 +12,7 @@ module Program =
                     |> Purse.add (Change.create 2 3)
 
         let purse2 =    purse |> Purse.subtract(Change.create 10 9)
+        let t = Purse.totalValue purse;
 
         //Change.create 10 2 |> Change.individualChange |> List.iter (fun c -> printfn "%s" (Change.toString c))
         //Purse.individualChange purse |> List.iter (fun c -> printfn "%s" (Change.toString c))
