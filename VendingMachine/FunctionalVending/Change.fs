@@ -35,7 +35,15 @@ module Change =
         loop 0 changes
 
     let toString change =
-        sprintf "%d * %d" change.Quantity change.Denomination
+        sprintf "%dp * %d" change.Denomination change.Quantity
+
+    let individualChange change =
+        let rec loop acc count =
+            match count with
+            | 0 -> acc
+            | _ -> loop ((create change.Denomination 1) :: acc) (count - 1)
+
+        loop [] change.Quantity
 
 
 

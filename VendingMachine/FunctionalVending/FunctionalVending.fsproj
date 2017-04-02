@@ -55,11 +55,13 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Extensions.fs" />
     <None Include="App.config" />
     <Content Include="packages.config" />
     <Compile Include="Change.fs" />
     <Compile Include="Purse.fs" />
     <Compile Include="GreedyAlgorithm.fs" />
+    <Compile Include="BacktrackingAlgorithm.fs" />
     <Compile Include="zzzProgram.fs" />
   </ItemGroup>
   <ItemGroup>

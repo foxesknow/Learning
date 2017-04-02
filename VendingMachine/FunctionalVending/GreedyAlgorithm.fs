@@ -2,7 +2,7 @@
 
 module GreedyAlgorithm =
 
-    let calculate changeRequired (machine : Purse.T) =
+    let calculate changeRequired (purse : Purse.T) =
         let rec loop changeRequired (purse : Purse.T) (soFar : Purse.T) =
             if changeRequired = 0 then
                 Some soFar
@@ -22,4 +22,4 @@ module GreedyAlgorithm =
 
                 | _ -> None
 
-        loop changeRequired machine Purse.create
+        loop changeRequired purse Purse.create
