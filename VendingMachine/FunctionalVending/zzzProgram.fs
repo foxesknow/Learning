@@ -19,7 +19,7 @@ module Program =
 
         //purse2.Money |> List.iter (fun c -> printfn "%s" (Change.toString c))
 
-        match BacktrackingAlgorithm.calculate 6 purse with
+        match BacktrackingAlgorithm.calculate 8 purse with
         | Some purse -> purse.Money |> List.iter (fun c -> printfn "%s" (Change.toString c))
         | None -> printfn "no change available"
 
