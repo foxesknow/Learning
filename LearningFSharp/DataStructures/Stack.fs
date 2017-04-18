@@ -48,11 +48,14 @@ module Stack =
         | StackItem(value, rest) -> Some (value, rest)
         | _ -> None
 
-    let rec fold f seed stack =
+    let rec fold f state stack =
         match stack with
-        | StackItem(item, rest) -> fold f (f seed item) rest
-        | Empty -> seed
+        | StackItem(item, rest) -> fold f (f state item) rest
+        | Empty -> state
 
     let length stack =
         fold (fun state i -> state + 1) 0 stack
+
+    let reverse stack =
+        fold (fun state i -> push i state) Empty stack
 

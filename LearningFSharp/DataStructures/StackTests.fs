@@ -115,3 +115,37 @@ module StackTests =
                 Assert.IsTrue((Stack.top rest) = 3)
             
             | None -> failwith "expected some"
+
+        [<TestMethod>]
+        member this.``length of an empty stack`` () =
+            let length = Stack.empty |> Stack.length
+            Assert.IsTrue((length = 0))
+
+        [<TestMethod>]
+        member this.``fold an empty stack`` () =
+            let value = Stack.empty |> Stack.fold (fun seed value -> seed + value) 0
+            Assert.IsTrue((value = 0))
+
+        [<TestMethod>]
+        member this.``fold a non-empty stack`` () =
+            let value = Stack.empty 
+                        |> Stack.push 3 
+                        |> Stack.push 5 
+                        |> Stack.push 7 
+                        |> Stack.fold (fun seed value -> seed + value) 0
+            Assert.IsTrue((value = 15))
+
+        [<TestMethod>]
+        member this.``length of a non-empty stack`` () =
+            let length = Stack.empty |> Stack.push 1 |> Stack.push 2 |> Stack.length
+            Assert.IsTrue((length = 2))
+
+        [<TestMethod>]
+        member this.``reverse of an empty stack`` () =
+            let s = Stack.empty |> Stack.reverse
+            Stack.isEmpty s |> Assert.IsTrue
+
+        [<TestMethod>]
+        member this.``reverse of a non-empty stack`` () =
+            let s = Stack.empty |> Stack.push 1 |> Stack.push 2 |> Stack.reverse
+            Assert.IsTrue((Stack.top s) = 1)
