@@ -6,9 +6,22 @@ module Program =
     [<EntryPoint>]
     let main argv = 
 
-        let s = Stack.empty
-                |> Stack.push 10
+        let q = Queue.empty
+                |> Queue.enqueue 1
+                |> Queue.enqueue 2
+                |> Queue.enqueue 3
 
-        printfn "There are %A items" (Stack.length s)
+        let printer item queue =
+            printfn "%A" item
+            Queue.tryFrontAndDequeue queue
+
+        Queue.tryFrontAndDequeue q
+        |> Option.bind(fun (top, q) -> printer top q)
+        |> Option.bind(fun (top, q) -> printer top q)
+        |> Option.bind(fun (top, q) -> printer top q)
+        |> Option.bind(fun (top, q) -> printer top q)
+        |> ignore
+
+        printfn "There are %A items" (Queue.length q)
         
         0 // return an integer exit code
