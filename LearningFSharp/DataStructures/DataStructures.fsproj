@@ -60,6 +60,7 @@
     <Compile Include="Stack.fs" />
     <Compile Include="StackTests.fs" />
     <Compile Include="Queue.fs" />
+    <Compile Include="QueueTests.fs" />
     <Compile Include="zzProgram.fs" />
   </ItemGroup>
   <ItemGroup>

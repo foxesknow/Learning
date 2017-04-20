@@ -2,42 +2,61 @@
 
 module Queue =
 
-    type 'a T = {Front : Stack.T<'a>; Back : Stack.T<'a>}
-
+    type 'a T =
+        | Empty
+        | Queue of Stack.T<'a> * Stack.T<'a>
+    
     let private rebalance queue =
         match queue with
-        | {Front = Stack.Empty; Back = back} -> {Front = Stack.reverse back; Back = Stack.empty}
+        | Empty -> Empty
+        | Queue(front, back) when front = Stack.Empty && back = Stack.Empty -> Empty
+        | Queue(front, back) when front = Stack.Empty -> Queue(Stack.reverse back, Stack.Empty)
         | _ -> queue
 
     let empty =
-        {Front = Stack.empty; Back = Stack.empty}
+        Empty
+
+    let isEmpty queue =
+        match queue with
+        | Empty -> true
+        | _ -> false
 
     let enqueue item queue =
-        rebalance {queue with Back = Stack.push item queue.Back}
+        match queue with
+        | Empty -> rebalance(Queue(Stack.Empty, (Stack.Empty |> Stack.push item)))
+        | Queue(front, back) -> rebalance(Queue(front, Stack.push item back))
+
 
     let front queue =
-        match queue.Front with
-        | Stack.Empty -> failwith "nothing in queue"
-        | s -> Stack.top s
+        match queue with
+        | Empty -> failwith "queue is empty"
+        | Queue(front, _) -> Stack.top front
 
     let tryFront queue =
-        Stack.tryTop queue.Front
+        match queue with
+        | Empty -> None
+        | Queue(front, _) -> Stack.tryTop front
 
     let dequeue queue =
-        match queue.Front with
-        | Stack.Empty -> failwith "nothing in queue"
-        | s -> rebalance {queue with Front = Stack.pop s}
+        match queue with
+        | Empty -> failwith "queue is empty"
+        | Queue(front, back) -> rebalance(Queue(Stack.pop front, back))
 
     let tryDequeue queue =
-        match queue.Front with
-        | Stack.Empty -> None
-        | s -> Some(rebalance {queue with Front = Stack.pop s})
+        match queue with
+        | Empty -> None
+        | _ -> Some(dequeue queue)
 
     let tryFrontAndDequeue queue =
-        match queue.Front with
-        | Stack.Empty -> None
-        | s -> Some(Stack.top s, rebalance {queue with Front = Stack.pop s})
+        match queue with
+        | Empty -> None
+        | Queue(front, back) -> 
+            let top = Stack.top front
+            let q = rebalance(Queue(Stack.pop front, back))
+            Some(top, q)
 
     let length queue =
-        (Stack.length queue.Front) + (Stack.length queue.Back)
+        match queue with
+        | Empty -> 0
+        | Queue(front, back) -> (Stack.length front) + (Stack.length back)
 
