@@ -3,6 +3,7 @@
 module Queue =
 
     type 'a T =
+        internal
         | Empty
         | Queue of Stack.T<'a> * Stack.T<'a>
     

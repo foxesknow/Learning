@@ -56,6 +56,8 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <None Include="App.config" />
+    <Compile Include="BinaryTree.fs" />
+    <Compile Include="BinaryTreeTests.fs" />
     <Content Include="packages.config" />
     <Compile Include="Stack.fs" />
     <Compile Include="StackTests.fs" />

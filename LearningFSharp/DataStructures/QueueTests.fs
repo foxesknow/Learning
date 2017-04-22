@@ -73,6 +73,16 @@ module QueueTests =
             Assert.AreEqual((Queue.front q), "world")
 
         [<TestMethod>]
+        member this.``dequeue to empty`` () =
+            let baseQ = Queue.empty |> Queue.enqueue "Hello" |> Queue.enqueue "world"
+            let q1 = Queue.dequeue baseQ
+            let q2 = Queue.dequeue q1
+
+            match q2 with
+            | Queue.Empty -> Assert.IsTrue(true)
+            | _ -> Assert.Fail("should be empty")
+
+        [<TestMethod>]
         member this.``tryDequeue an empty queue`` () =
             let q = Queue.empty
             match Queue.tryDequeue q with

@@ -3,6 +3,7 @@
 module Stack =
 
     type 'a T =
+        internal
         | Empty
         | StackItem of 'a * 'a T
 
