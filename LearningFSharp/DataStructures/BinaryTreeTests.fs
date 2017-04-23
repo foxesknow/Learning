@@ -99,7 +99,7 @@ module BinaryTreeTests =
 
             [<TestMethod>]
             member this.``breadthFirst`` () =
-                let tree = [100; 50; 120; 40; 130; 110; 60] |> List.fold (fun state i -> BinaryTree.addCP i state) BinaryTree.empty
+                let tree = [100; 50; 120; 40; 130; 110; 60] |> List.fold (fun state i -> BinaryTree.add i state) BinaryTree.empty
                 let sequence = BinaryTree.breadthFirst tree
                 let array = Seq.toArray sequence
 
