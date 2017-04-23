@@ -57,5 +57,53 @@ module BinaryTree =
             else 
                 contains item right
 
+    let rec asInfixSequence tree =
+        seq{
+            match tree with
+            | Empty -> yield! Seq.empty
+            | Node(i, left, right) ->
+                yield! asInfixSequence left
+                yield i
+                yield! asInfixSequence right
+        }
+
+    let rec asPrefixSequence tree =
+        seq{
+            match tree with
+            | Empty -> yield! Seq.empty
+            | Node(i, left, right) ->
+                yield i
+                yield! asPrefixSequence left                
+                yield! asPrefixSequence right
+        }
+
+    let rec asPostfixSequence tree =
+        seq{
+            match tree with
+            | Empty -> yield! Seq.empty
+            | Node(i, left, right) ->
+                yield! asPostfixSequence left                
+                yield! asPostfixSequence right
+                yield i
+        }
+
+    let breadthFirst tree =        
+        let rec loop q =
+            seq{
+                match Queue.tryFrontAndDequeue q with
+                | None -> yield! Seq.empty
+                | Some(node, q') ->
+                    match node with
+                    | Empty -> yield! Seq.empty
+                    | Node(i, left, right) ->
+                        yield i
+                        yield! (q' |> Queue.enqueue left |> Queue.enqueue right |> loop)
+            }
+
+        let queue = Queue.empty |> Queue.enqueue tree
+        loop queue
+                
+            
+
 
 

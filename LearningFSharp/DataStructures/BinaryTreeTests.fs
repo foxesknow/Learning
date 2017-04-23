@@ -55,3 +55,59 @@ module BinaryTreeTests =
 
                 t1 |> BinaryTree. add 20 |> BinaryTree.length |> (=) 1 |> Assert.IsTrue
 
+            [<TestMethod>]
+            member this.``asInfixSequqnce`` () =
+                let tree = [100; 50; 120; 40; 130; 110; 60] |> List.fold (fun state i -> BinaryTree.addCP i state) BinaryTree.empty
+                let sequence = BinaryTree.asInfixSequence tree
+                let array = Seq.toArray sequence
+
+                Assert.AreEqual(40, array.[0])
+                Assert.AreEqual(50, array.[1])
+                Assert.AreEqual(60, array.[2])
+                Assert.AreEqual(100, array.[3])
+                Assert.AreEqual(110, array.[4])
+                Assert.AreEqual(120, array.[5])
+                Assert.AreEqual(130, array.[6])
+
+            [<TestMethod>]
+            member this.``asPrefixSequence`` () =
+                let tree = [100; 50; 120; 40; 130; 110; 60] |> List.fold (fun state i -> BinaryTree.addCP i state) BinaryTree.empty
+                let sequence = BinaryTree.asPrefixSequence tree
+                let array = Seq.toArray sequence
+
+                Assert.AreEqual(100 ,array.[0])
+                Assert.AreEqual(50, array.[1])
+                Assert.AreEqual(40, array.[2])
+                Assert.AreEqual(60, array.[3])
+                Assert.AreEqual(120, array.[4])
+                Assert.AreEqual(110 ,array.[5])
+                Assert.AreEqual(130, array.[6])
+
+            [<TestMethod>]
+            member this.``asPostfixSequence`` () =
+                let tree = [100; 50; 120; 40; 130; 110; 60] |> List.fold (fun state i -> BinaryTree.addCP i state) BinaryTree.empty
+                let sequence = BinaryTree.asPostfixSequence tree
+                let array = Seq.toArray sequence
+
+                Assert.AreEqual(40, array.[0])
+                Assert.AreEqual(60, array.[1])
+                Assert.AreEqual(50, array.[2])
+                Assert.AreEqual(110, array.[3])
+                Assert.AreEqual(130, array.[4])
+                Assert.AreEqual(120, array.[5])
+                Assert.AreEqual(100, array.[6])
+
+            [<TestMethod>]
+            member this.``breadthFirst`` () =
+                let tree = [100; 50; 120; 40; 130; 110; 60] |> List.fold (fun state i -> BinaryTree.addCP i state) BinaryTree.empty
+                let sequence = BinaryTree.breadthFirst tree
+                let array = Seq.toArray sequence
+
+                Assert.AreEqual(100, array.[0])
+                Assert.AreEqual(50, array.[1])
+                Assert.AreEqual(120, array.[2])
+                Assert.AreEqual(40, array.[3])
+                Assert.AreEqual(60, array.[4])
+                Assert.AreEqual(110, array.[5])
+                Assert.AreEqual(130, array.[6])
+
