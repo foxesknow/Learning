@@ -17,30 +17,30 @@ module QueueTests =
         [<TestMethod>]
         member this.``enqueue`` () =
             let length = Queue.empty |> Queue.enqueue 1 |> Queue.enqueue 2 |> Queue.length
-            Assert.AreEqual(length, 2)
+            Assert.AreEqual(2, length)
 
         [<TestMethod>]
         member this.``enqueue and dequeue`` () =
             let q1 = Queue.empty |> Queue.enqueue 1 |> Queue.enqueue 2
             let q2 = q1 |> Queue.dequeue |> Queue.enqueue 4 |> Queue.enqueue 5
 
-            Assert.AreEqual((Queue.length q2), 3)
+            Assert.AreEqual(3, (Queue.length q2))
 
         [<TestMethod>]
         member this.``front`` () =
             let q = Queue.empty |> Queue.enqueue 1 |> Queue.enqueue 2 |> Queue.enqueue 3
             
             let f1 = q |> Queue.front
-            Assert.AreEqual(f1, 1)
+            Assert.AreEqual(1, f1)
 
             let f2 = q |> Queue.dequeue |> Queue.front 
-            Assert.AreEqual(f2, 2)
+            Assert.AreEqual(2, f2)
         
         [<TestMethod>]
         [<ExpectedException(typeof<Exception>)>]
         member this.``front when empty`` () =
             let f = Queue.empty |> Queue.front
-            Assert.AreEqual(f, 1)
+            Assert.AreEqual(1, f)
 
         [<TestMethod>]
         member this.``tryFront when empty`` () =
@@ -67,10 +67,10 @@ module QueueTests =
         [<TestMethod>]
         member this.``dequeue`` () =
             let baseQ = Queue.empty |> Queue.enqueue "Hello" |> Queue.enqueue "world"
-            Assert.AreEqual((Queue.front baseQ), "Hello")
+            Assert.AreEqual("Hello", (Queue.front baseQ))
             
             let q = Queue.dequeue baseQ
-            Assert.AreEqual((Queue.front q), "world")
+            Assert.AreEqual("world", (Queue.front q))
 
         [<TestMethod>]
         member this.``dequeue to empty`` () =
@@ -109,14 +109,14 @@ module QueueTests =
             match Queue.tryFrontAndDequeue q with
             | None -> Assert.Fail("The queue shouldn't be empty")
             | Some(front, q') -> 
-                Assert.AreEqual(front, "Jack")
-                Assert.AreEqual((Queue.length q'), 3)
-                Assert.AreEqual((Queue.front q'), "Sawyer")
+                Assert.AreEqual("Jack", front)
+                Assert.AreEqual(3, (Queue.length q'))
+                Assert.AreEqual("Sawyer", (Queue.front q'))
 
         [<TestMethod>]
         member this.``length`` () =
-            Assert.AreEqual((Queue.empty |> Queue.length), 0)
+            Assert.AreEqual(0, (Queue.empty |> Queue.length))
 
             let q = Queue.empty |> Queue.enqueue "Jack" |> Queue.enqueue "Sawyer" |> Queue.enqueue "Kate" |> Queue.enqueue "Hurley"
-            Assert.AreEqual((Queue.length q), 4)
+            Assert.AreEqual(4, (Queue.length q))
 
