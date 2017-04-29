@@ -13,6 +13,36 @@ module BinaryTree =
         | Empty -> true
         | _ -> false
 
+    let head tree =
+        match tree with
+        | Empty -> failwith "tree is empty"
+        | Node(i, _, _) -> i
+
+    let tryHead tree =
+        match tree with
+        | Empty -> None
+        | Node(i, _, _) -> Some(i)
+
+    let left tree =
+        match tree with
+        | Empty -> failwith "tree is empty"
+        | Node(_, left, _) -> left
+
+    let tryLeft tree =
+        match tree with
+        | Empty -> None
+        | Node(_, left, _) -> Some(left)
+
+    let right tree =
+        match tree with
+        | Empty -> failwith "tree is empty"
+        | Node(_, _, right) -> right
+
+    let tryRight tree =
+        match tree with
+        | Empty -> None
+        | Node(_, _, right) -> Some(right)
+
     let rec length tree =
         match tree with
         | Empty -> 0

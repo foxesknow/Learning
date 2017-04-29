@@ -15,6 +15,78 @@ module BinaryTreeTests =
                 BinaryTree.empty |> BinaryTree.add 1 |> BinaryTree.isEmpty |> Assert.IsFalse
 
             [<TestMethod>]
+            [<ExpectedException(typeof<Exception>)>]
+            member this.``head of empty`` () =
+                BinaryTree.empty |> BinaryTree.head |> ignore
+
+            [<TestMethod>]
+            member this.``head of tree`` () =
+                BinaryTree.empty |> BinaryTree.add 50 |> BinaryTree.head |> (=) 50 |> Assert.IsTrue
+
+            [<TestMethod>]
+            member this.``tryHead of empty`` () =
+                match BinaryTree.empty |> BinaryTree.tryHead with
+                | None -> Assert.IsTrue(true)
+                | Some(_) -> Assert.Fail("head should be missing")
+
+            [<TestMethod>]
+            member this.``tryHead of something`` () =
+                match BinaryTree.empty |> BinaryTree.add(50) |> BinaryTree.tryHead with
+                | None -> Assert.Fail("tree is not empty")
+                | Some(x) -> Assert.AreEqual(50, x)
+
+            [<TestMethod>]
+            [<ExpectedException(typeof<Exception>)>]
+            member this.``left of empty`` () =
+                BinaryTree.empty |> BinaryTree.left|> ignore
+
+            [<TestMethod>]
+            member this.``left of tree, empty`` () =
+                BinaryTree.empty |> BinaryTree.add 50 |> BinaryTree.left |> BinaryTree.isEmpty |> Assert.IsTrue
+
+            [<TestMethod>]
+            member this.``left of tree, something there`` () =
+                let tree = BinaryTree.empty |> BinaryTree.add 50 |> BinaryTree.add 20
+                tree |> BinaryTree.left |> BinaryTree.isEmpty |> Assert.IsFalse
+                tree |> BinaryTree.left |> BinaryTree.head |> (=) 20 |> Assert.IsTrue
+
+            [<TestMethod>]
+            member this.``tryLeft of empty`` () =
+                match BinaryTree.empty |> BinaryTree.tryLeft with
+                | None -> Assert.IsTrue(true)
+                | Some(_) -> Assert.Fail("tree should be empty")
+              
+
+            [<TestMethod>]
+            member this.``tryLeft of something`` () =
+                match BinaryTree.empty |> BinaryTree.add 50 |> BinaryTree.tryLeft with
+                | None -> Assert.Fail("should be something")
+                | Some(_) -> Assert.IsTrue(true)
+
+            [<TestMethod>]
+            member this.``right of tree, empty`` () =
+                BinaryTree.empty |> BinaryTree.add 50 |> BinaryTree.right |> BinaryTree.isEmpty |> Assert.IsTrue
+
+            [<TestMethod>]
+            member this.``right of tree, something there`` () =
+                let tree = BinaryTree.empty |> BinaryTree.add 50 |> BinaryTree.add 70
+                tree |> BinaryTree.right |> BinaryTree.isEmpty |> Assert.IsFalse
+                tree |> BinaryTree.right |> BinaryTree.head |> (=) 70 |> Assert.IsTrue
+
+            [<TestMethod>]
+            member this.``tryRight of empty`` () =
+                match BinaryTree.empty |> BinaryTree.tryRight with
+                | None -> Assert.IsTrue(true)
+                | Some(_) -> Assert.Fail("tree should be empty")
+              
+
+            [<TestMethod>]
+            member this.``tryRight of something`` () =
+                match BinaryTree.empty |> BinaryTree.add 50 |> BinaryTree.tryRight with
+                | None -> Assert.Fail("should be something")
+                | Some(_) -> Assert.IsTrue(true)
+
+            [<TestMethod>]
             member this.``add`` () =
                 let t1 = BinaryTree.empty |> BinaryTree.add 20
                 t1 |> BinaryTree.isEmpty |> Assert.IsFalse
