@@ -16,15 +16,13 @@ module QueueTests =
 
         [<TestMethod>]
         member this.``enqueue`` () =
-            let length = Queue.empty |> Queue.enqueue 1 |> Queue.enqueue 2 |> Queue.length
-            Assert.AreEqual(2, length)
+            Queue.empty |> Queue.enqueue 1 |> Queue.enqueue 2 |> Queue.length |> Expect.equalTo 2
 
         [<TestMethod>]
         member this.``enqueue and dequeue`` () =
             let q1 = Queue.empty |> Queue.enqueue 1 |> Queue.enqueue 2
             let q2 = q1 |> Queue.dequeue |> Queue.enqueue 4 |> Queue.enqueue 5
-
-            Assert.AreEqual(3, (Queue.length q2))
+            q2 |> Queue.length |> Expect.equalTo 3
 
         [<TestMethod>]
         member this.``front`` () =
@@ -45,18 +43,12 @@ module QueueTests =
         [<TestMethod>]
         member this.``tryFront when empty`` () =
             let f = Queue.empty |> Queue.tryFront
-            
-            match f with
-            | None -> Assert.IsTrue(true)
-            | _ -> Assert.Fail("queue should be empty")
+            f |> Expect.none
 
         [<TestMethod>]
         member this.``tryFront when data`` () =
             let f = Queue.empty |> Queue.enqueue "Hello" |> Queue.tryFront
-            
-            match f with
-            | None -> Assert.Fail("queue has data but none returned")
-            | _ -> Assert.IsTrue(true)
+            f |> Expect.some
 
         [<TestMethod>]
         [<ExpectedException(typeof<Exception>)>]
@@ -67,10 +59,10 @@ module QueueTests =
         [<TestMethod>]
         member this.``dequeue`` () =
             let baseQ = Queue.empty |> Queue.enqueue "Hello" |> Queue.enqueue "world"
-            Assert.AreEqual("Hello", (Queue.front baseQ))
+            baseQ |> Queue.front |> Expect.equalTo "Hello"
             
             let q = Queue.dequeue baseQ
-            Assert.AreEqual("world", (Queue.front q))
+            q |> Queue.front |> Expect.equalTo "world"
 
         [<TestMethod>]
         member this.``dequeue to empty`` () =
@@ -85,23 +77,18 @@ module QueueTests =
         [<TestMethod>]
         member this.``tryDequeue an empty queue`` () =
             let q = Queue.empty
-            match Queue.tryDequeue q with
-            | None -> Assert.IsTrue(true)
-            | _ -> Assert.Fail ("The queue should be empty")
+            q |> Queue.tryDequeue |> Expect.none
 
         [<TestMethod>]
         member this.``tryDequeue a queue with data`` () =
             let q = Queue.empty |> Queue.enqueue "Jack" |> Queue.enqueue "Sawyer"
-            match Queue.tryDequeue q with
-            | None -> Assert.Fail("The queue shouldn't be empty")
-            | _ -> Assert.IsTrue(true)
+            q |> Queue.tryDequeue |> Expect.some
+
 
         [<TestMethod>]
-            member this.``tryFrontAndDequeue an empty queue`` () =
-                let q = Queue.empty
-                match Queue.tryFrontAndDequeue q with
-                | None -> Assert.IsTrue(true)
-                | _ -> Assert.Fail ("The queue should be empty")            
+        member this.``tryFrontAndDequeue an empty queue`` () =
+            let q = Queue.empty
+            q |> Queue.tryFrontAndDequeue |> Expect.none
 
         [<TestMethod>]
         member this.``tryFrontAndDequeue a queue with data`` () =
@@ -109,14 +96,12 @@ module QueueTests =
             match Queue.tryFrontAndDequeue q with
             | None -> Assert.Fail("The queue shouldn't be empty")
             | Some(front, q') -> 
-                Assert.AreEqual("Jack", front)
-                Assert.AreEqual(3, (Queue.length q'))
-                Assert.AreEqual("Sawyer", (Queue.front q'))
+                Expect.equalTo "Jack" front
+                Queue.length q' |> Expect.equalTo 3
+                Queue.front q' |> Expect.equalTo "Sawyer"
 
         [<TestMethod>]
         member this.``length`` () =
-            Assert.AreEqual(0, (Queue.empty |> Queue.length))
-
-            let q = Queue.empty |> Queue.enqueue "Jack" |> Queue.enqueue "Sawyer" |> Queue.enqueue "Kate" |> Queue.enqueue "Hurley"
-            Assert.AreEqual(4, (Queue.length q))
+            Queue.empty |> Queue.length |> Expect.equalTo 0
+            Queue.empty |> Queue.enqueue "Jack" |> Queue.enqueue "Sawyer" |> Queue.enqueue "Kate" |> Queue.enqueue "Hurley" |> Queue.length |> Expect.equalTo 4
 

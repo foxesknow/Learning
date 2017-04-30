@@ -18,12 +18,12 @@ module StackTests =
         member this.``push onto empty`` () =
             let s = Stack.empty |> Stack.push 10
             s |> Stack.isEmpty |> Assert.IsFalse
-            Assert.IsTrue((Stack.top s) = 10)
+            s |> Stack.top |> Expect.equalTo 10
 
         [<TestMethod>]
         member this.``push onto something`` () =
             let s = Stack.empty |> Stack.push 10 |> Stack.push 99
-            Assert.IsTrue((Stack.top s) = 99)
+            s |> Stack.top |> Expect.equalTo 99
 
         [<TestMethod>]
         [<ExpectedException(typeof<Exception>)>]
@@ -34,21 +34,17 @@ module StackTests =
         [<TestMethod>]
         member this.``top of non-empty stack `` () =
             let s = Stack.empty |> Stack.push 10
-            Assert.IsTrue((Stack.top s) = 10)
+            s |> Stack.top |> Expect.equalTo 10
 
         [<TestMethod>]
         member this.``tryTop of empty stack `` () =
             let s = Stack.empty
-            match Stack.tryTop s with
-            | Some _ -> Assert.Fail()
-            | None -> Assert.IsTrue(true)
+            s |> Stack.tryTop |> Expect.none
 
         [<TestMethod>]
         member this.``tryTop of non-empty stack `` () =
             let s = Stack.empty |> Stack.push 58
-            match Stack.tryTop s with
-            | Some value -> Assert.IsTrue((value = 58))
-            | None -> Assert.Fail()
+            Stack.tryTop s |> Expect.some
 
         [<TestMethod>]
         [<ExpectedException(typeof<Exception>)>]
@@ -65,24 +61,17 @@ module StackTests =
         member this.``pop of many item stack`` () =
             let s = Stack.empty |> Stack.push 12 |> Stack.push 60
             Stack.pop s |> Stack.isEmpty |> Assert.IsFalse
-
-            match Stack.pop s |> Stack.top with
-            | 12 -> Assert.IsTrue(true)
-            | _ -> Assert.Fail()
+            s |> Stack.pop |> Stack.top |> Expect.equalTo 12
 
         [<TestMethod>]
         member this.``tryPop of empty stack`` () =
             let s = Stack.empty
-            match Stack.tryPop s with
-            | Some _ -> failwith "expected none"
-            | None -> Assert.IsTrue(true)
+            s |> Stack.tryPop |> Expect.none
 
         [<TestMethod>]
         member this.``tryPop of non-empty stack`` () =
             let s = Stack.empty |> Stack.push 42
-            match Stack.tryPop s with
-            | Some p -> Assert.IsTrue(true)
-            | None -> failwith "expected some"
+            s |> Stack.tryPop |> Expect.some
 
         [<TestMethod>]
         [<ExpectedException(typeof<Exception>)>]
@@ -101,9 +90,7 @@ module StackTests =
         [<TestMethod>]
         member this.``tryTopAndPop of empty stack`` () =
             let s = Stack.empty
-            match Stack.tryTopAndPop s with
-            | Some(top, rest) -> failwith "should be empty"
-            | None -> Assert.IsTrue(true)
+            s |> Stack.tryTopAndPop |> Expect.none
 
         [<TestMethod>]
         member this.``tryTopAndPop of non-empty stack`` () =
@@ -118,13 +105,11 @@ module StackTests =
 
         [<TestMethod>]
         member this.``length of an empty stack`` () =
-            let length = Stack.empty |> Stack.length
-            Assert.IsTrue((length = 0))
+            Stack.empty |> Stack.length |> Expect.equalTo 0
 
         [<TestMethod>]
         member this.``fold an empty stack`` () =
-            let value = Stack.empty |> Stack.fold (fun seed value -> seed + value) 0
-            Assert.IsTrue((value = 0))
+            Stack.empty |> Stack.fold (fun seed value -> seed + value) 0 |> Expect.equalTo 0
 
         [<TestMethod>]
         member this.``fold a non-empty stack`` () =
@@ -137,8 +122,7 @@ module StackTests =
 
         [<TestMethod>]
         member this.``length of a non-empty stack`` () =
-            let length = Stack.empty |> Stack.push 1 |> Stack.push 2 |> Stack.length
-            Assert.IsTrue((length = 2))
+            Stack.empty |> Stack.push 1 |> Stack.push 2 |> Stack.length |> Expect.equalTo 2
 
         [<TestMethod>]
         member this.``reverse of an empty stack`` () =
@@ -148,4 +132,4 @@ module StackTests =
         [<TestMethod>]
         member this.``reverse of a non-empty stack`` () =
             let s = Stack.empty |> Stack.push 1 |> Stack.push 2 |> Stack.reverse
-            Assert.IsTrue((Stack.top s) = 1)
+            s |> Stack.top |> Expect.equalTo 1

@@ -21,13 +21,11 @@ module BinaryTreeTests =
 
             [<TestMethod>]
             member this.``head of tree`` () =
-                BinaryTree.empty |> BinaryTree.add 50 |> BinaryTree.head |> (=) 50 |> Assert.IsTrue
+                BinaryTree.empty |> BinaryTree.add 50 |> BinaryTree.head |> Expect.equalTo 50
 
             [<TestMethod>]
             member this.``tryHead of empty`` () =
-                match BinaryTree.empty |> BinaryTree.tryHead with
-                | None -> Assert.IsTrue(true)
-                | Some(_) -> Assert.Fail("head should be missing")
+                BinaryTree.empty |> BinaryTree.tryHead |> Expect.none
 
             [<TestMethod>]
             member this.``tryHead of something`` () =
@@ -48,20 +46,16 @@ module BinaryTreeTests =
             member this.``left of tree, something there`` () =
                 let tree = BinaryTree.empty |> BinaryTree.add 50 |> BinaryTree.add 20
                 tree |> BinaryTree.left |> BinaryTree.isEmpty |> Assert.IsFalse
-                tree |> BinaryTree.left |> BinaryTree.head |> (=) 20 |> Assert.IsTrue
+                tree |> BinaryTree.left |> BinaryTree.head |> Expect.equalTo 20
 
             [<TestMethod>]
             member this.``tryLeft of empty`` () =
-                match BinaryTree.empty |> BinaryTree.tryLeft with
-                | None -> Assert.IsTrue(true)
-                | Some(_) -> Assert.Fail("tree should be empty")
+                BinaryTree.empty |> BinaryTree.tryLeft |> Expect.none
               
 
             [<TestMethod>]
             member this.``tryLeft of something`` () =
-                match BinaryTree.empty |> BinaryTree.add 50 |> BinaryTree.tryLeft with
-                | None -> Assert.Fail("should be something")
-                | Some(_) -> Assert.IsTrue(true)
+                BinaryTree.empty |> BinaryTree.add 50 |> BinaryTree.tryLeft |> Expect.some
 
             [<TestMethod>]
             member this.``right of tree, empty`` () =
@@ -71,20 +65,16 @@ module BinaryTreeTests =
             member this.``right of tree, something there`` () =
                 let tree = BinaryTree.empty |> BinaryTree.add 50 |> BinaryTree.add 70
                 tree |> BinaryTree.right |> BinaryTree.isEmpty |> Assert.IsFalse
-                tree |> BinaryTree.right |> BinaryTree.head |> (=) 70 |> Assert.IsTrue
+                tree |> BinaryTree.right |> BinaryTree.head |> Expect.equalTo 70
 
             [<TestMethod>]
             member this.``tryRight of empty`` () =
-                match BinaryTree.empty |> BinaryTree.tryRight with
-                | None -> Assert.IsTrue(true)
-                | Some(_) -> Assert.Fail("tree should be empty")
+                BinaryTree.empty |> BinaryTree.tryRight |> Expect.none
               
 
             [<TestMethod>]
             member this.``tryRight of something`` () =
-                match BinaryTree.empty |> BinaryTree.add 50 |> BinaryTree.tryRight with
-                | None -> Assert.Fail("should be something")
-                | Some(_) -> Assert.IsTrue(true)
+                BinaryTree.empty |> BinaryTree.add 50 |> BinaryTree.tryRight |> Expect.some
 
             [<TestMethod>]
             member this.``add`` () =
@@ -92,10 +82,10 @@ module BinaryTreeTests =
                 t1 |> BinaryTree.isEmpty |> Assert.IsFalse
 
                 let t2 = t1|> BinaryTree.add 10
-                t2 |> BinaryTree.length |> (=) 2 |> Assert.IsTrue
+                t2 |> BinaryTree.length |> Expect.equalTo 2
 
                 let t3 = t2|> BinaryTree.add 30
-                t3 |> BinaryTree.length |> (=) 3 |> Assert.IsTrue
+                t3 |> BinaryTree.length |> Expect.equalTo 3
 
 
             [<TestMethod>]
@@ -104,28 +94,28 @@ module BinaryTreeTests =
                 t1 |> BinaryTree.isEmpty |> Assert.IsFalse
 
                 let t2 = t1|> BinaryTree.addCP 10
-                t2 |> BinaryTree.length |> (=) 2 |> Assert.IsTrue
+                t2 |> BinaryTree.length |> Expect.equalTo 2
 
                 let t3 = t2|> BinaryTree.addCP 30
-                t3 |> BinaryTree.length |> (=) 3 |> Assert.IsTrue
+                t3 |> BinaryTree.length |> Expect.equalTo 3
 
                 let t4 = t3|> BinaryTree.addCP 5
-                t4 |> BinaryTree.length |> (=) 4 |> Assert.IsTrue
+                t4 |> BinaryTree.length |> Expect.equalTo 4
 
                 let t5 = t4|> BinaryTree.addCP 10
-                t5 |> BinaryTree.length |> (=) 4 |> Assert.IsTrue
+                t5 |> BinaryTree.length |> Expect.equalTo 4
 
             [<TestMethod>]
             member this.``addCP #2`` () =
                 let tree = [100; 50; 120; 40; 130; 110; 60] |> List.fold (fun state i -> BinaryTree.addCP i state) BinaryTree.empty
-                tree |> BinaryTree.length |> (=) 7 |> Assert.IsTrue
+                tree |> BinaryTree.length |> Expect.equalTo 7
 
             [<TestMethod>]
             member this.``add duplicate`` () =
                 let t1 = BinaryTree.empty |> BinaryTree.add 20
-                t1 |> BinaryTree.length |> (=) 1 |> Assert.IsTrue
+                t1 |> BinaryTree.length |> Expect.equalTo 1
 
-                t1 |> BinaryTree. add 20 |> BinaryTree.length |> (=) 1 |> Assert.IsTrue
+                t1 |> BinaryTree. add 20 |> BinaryTree.length |> Expect.equalTo 1
 
             [<TestMethod>]
             member this.``asInfixSequqnce`` () =
