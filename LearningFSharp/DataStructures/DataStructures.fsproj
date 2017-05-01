@@ -64,6 +64,8 @@
     <Compile Include="QueueTests.fs" />
     <Compile Include="BinaryTree.fs" />
     <Compile Include="BinaryTreeTests.fs" />
+    <Compile Include="RedBlackTree.fs" />
+    <Compile Include="RedBlackTreeTests.fs" />
     <Compile Include="zzProgram.fs" />
   </ItemGroup>
   <ItemGroup>

@@ -53,7 +53,7 @@ module BinaryTree =
         match tree with
         | Empty -> Node(item, Empty, Empty)
         | Node(i, left, right) as node ->
-            if i = item then 
+            if item = i then 
                 node
             else if item < i then 
                 Node(i, add item left, right)
@@ -79,8 +79,8 @@ module BinaryTree =
     let rec contains item tree =
         match tree with
         | Empty -> false
-        | Node(i, left, right) as node ->
-            if i = item then 
+        | Node(i, left, right) ->
+            if item = i then 
                 true
             else if item < i then 
                 contains item left
