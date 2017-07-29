@@ -44,7 +44,7 @@ StackTrace StackTrace::Capture() noexcept
     auto numberOfFrames = ::CaptureStackBackTrace(1, MaxStackFrames, stack, nullptr);
     
 
-    auto *symbol = static_cast<SYMBOL_INFO*>(::malloc(sizeof(SYMBOL_INFO) + ((MaxFunctionNameLength -1) * sizeof(TCHAR))));
+    auto *symbol = static_cast<SYMBOL_INFO*>(::malloc(sizeof(SYMBOL_INFO) + ((MaxFunctionNameLength -1) * sizeof(CHAR))));
     symbol->MaxNameLen = MaxFunctionNameLength;
     symbol->SizeOfStruct = sizeof(SYMBOL_INFO);
 
