@@ -49,7 +49,6 @@ module RedBlackTreeTests =
         [<TestMethod>]
         member this.``tryLeft of empty`` () =
             RedBlackTree.empty |> RedBlackTree.tryLeft |> Expect.none
-              
 
         [<TestMethod>]
         member this.``tryLeft of something #1`` () =
@@ -58,6 +57,28 @@ module RedBlackTreeTests =
         [<TestMethod>]
         member this.``tryLeft of something #2`` () =
             RedBlackTree.empty |> RedBlackTree.add 50 |> RedBlackTree.add 20 |> RedBlackTree.tryLeft |> Expect.some
+
+        [<TestMethod>]
+        member this.``right of tree, empty`` () =
+            RedBlackTree.empty |> RedBlackTree.add 50 |> RedBlackTree.right |> RedBlackTree.isEmpty |> Assert.IsTrue
+
+        [<TestMethod>]
+        member this.``right of tree, something there`` () =
+            let tree = RedBlackTree.empty |> RedBlackTree.add 50 |> RedBlackTree.add 70
+            tree |> RedBlackTree.right |> RedBlackTree.isEmpty |> Assert.IsFalse
+            tree |> RedBlackTree.right |> RedBlackTree.head |> Expect.equalTo 70
+
+        [<TestMethod>]
+        member this.``tryRight of empty`` () =
+            RedBlackTree.empty |> RedBlackTree.tryRight |> Expect.none
+              
+        [<TestMethod>]
+        member this.``tryRight of something #1`` () =
+            RedBlackTree.empty |> RedBlackTree.add 50 |> RedBlackTree.tryRight |> Expect.none
+
+        [<TestMethod>]
+        member this.``tryRight of something #2`` () =
+            RedBlackTree.empty |> RedBlackTree.add 50 |> RedBlackTree.add 75 |> RedBlackTree.tryRight |> Expect.some
         
         [<TestMethod>]
         member this.``length of empty`` () =

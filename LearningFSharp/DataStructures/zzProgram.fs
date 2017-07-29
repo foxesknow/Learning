@@ -5,7 +5,6 @@
 module Program = 
     [<EntryPoint>]
     let main argv = 
-
         let q = Queue.empty
                 |> Queue.enqueue 1
                 |> Queue.enqueue 2

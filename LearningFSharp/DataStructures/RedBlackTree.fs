@@ -73,10 +73,10 @@ module RedBlackTree =
 
 
     let private balance = function
-        | Black, z, Node(Red, x, a, Node(Red, y, b, c)), d
-        | Black, z, Node(Red, y, Node(Red, x, a, b), c), d
-        | Black, x, a, Node(Red, y, b, Node(Red, z, c, d))
-        | Black, x, a, Node(Red, z, Node(Red, y, b, c), d)
+        | Black, z, Node(Red, x, a, Node(Red, y, b, c)), d                  // left, right
+        | Black, z, Node(Red, y, Node(Red, x, a, b), c), d                  // left, left
+        | Black, x, a, Node(Red, y, b, Node(Red, z, c, d))                  // right, right
+        | Black, x, a, Node(Red, z, Node(Red, y, b, c), d)                  // right, left
             -> Node(Red, y, Node(Black, x, a, b), Node(Black, z, c, d))
         | color, item, left, right
             -> Node(color, item, left, right)
