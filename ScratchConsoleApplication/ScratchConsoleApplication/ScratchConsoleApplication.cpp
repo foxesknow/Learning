@@ -4,16 +4,17 @@
 #include "stdafx.h"
 
 #include "StackTrace.h"
+#include "TokenExpander.h"
+#include "Settings.h"
 
 #include <iostream>
 
 int main()
-{
-    auto stackTrace = StackTrace::Capture();
-    for(auto &frame : stackTrace)
-    {
-        std::cout << frame << std::endl;
-    }
+{    
+    EnvironmentSettings settings;
+
+    std::wstring value;
+    auto found = settings.GetSetting(L"USERDOMAIN", value);
 
     return 0;
 }

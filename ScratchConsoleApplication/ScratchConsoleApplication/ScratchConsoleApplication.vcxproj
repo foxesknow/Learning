@@ -138,12 +138,20 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Settings.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="StackTrace.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TokenExpander.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Settings.cpp" />
     <ClCompile Include="ScratchConsoleApplication.cpp" />
+    <ClCompile Include="Settings.EnvironmentSettings.cpp" />
+    <ClCompile Include="Settings.FilesystemSettings.cpp" />
+    <ClCompile Include="Settings.SettingManager.cpp" />
+    <ClCompile Include="Settings.SettingsNode.cpp" />
     <ClCompile Include="StackTrace.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -151,6 +159,13 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TokenExpander.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ScratchConsoleApplication.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Settings.ProcessSettings.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
