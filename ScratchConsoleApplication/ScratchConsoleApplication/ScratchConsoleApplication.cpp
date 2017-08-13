@@ -9,12 +9,13 @@
 
 #include <iostream>
 
+#include "EnumConverter.h"
+
+#include "Mode.h"
+
 int main()
 {    
-    EnvironmentSettings settings;
-
-    std::wstring value;
-    auto found = settings.GetSetting(L"USERDOMAIN", value);
+    TestEnumToString();
 
     return 0;
 }

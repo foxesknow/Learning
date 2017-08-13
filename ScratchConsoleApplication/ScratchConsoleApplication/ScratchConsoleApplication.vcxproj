@@ -138,6 +138,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EnumConverter.h" />
+    <ClInclude Include="Mode.h" />
+    <ClInclude Include="People.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="StackTrace.h" />
@@ -146,6 +149,7 @@
     <ClInclude Include="TokenExpander.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EnumConverter.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="ScratchConsoleApplication.cpp" />
     <ClCompile Include="Settings.EnvironmentSettings.cpp" />
