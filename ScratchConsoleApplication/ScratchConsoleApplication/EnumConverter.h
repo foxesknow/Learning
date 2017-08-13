@@ -222,8 +222,8 @@ public:
 
         if(underlying != 0)
         {
-            // We failed to match something
-            result.clear();
+            // We failed to match something, just render it as a number
+            result = std::to_string(static_cast<underlying_type>(value));
             return false;
         }
 
@@ -299,6 +299,7 @@ public:
 };
 
 
+// TODO: Add a NullEnumConverter that just casts the enum to the underlying enum
 
 
 

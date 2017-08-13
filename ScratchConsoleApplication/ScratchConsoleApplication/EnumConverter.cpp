@@ -19,7 +19,8 @@ void TestBitfieldEnum()
     bool success = ModeConverter::TryToEnum("Read Write", mode);
 
     std::string asString;
-    success = ModeConverter::TryToString(Mode::Read | Mode::Write | Mode::Execute, asString);
+    //success = ModeConverter::TryToString(Mode::Read | Mode::Write | Mode::Execute, asString);
+    success = ModeConverter::TryToString(static_cast<Mode>(99), asString);
 }
 
 void TestEnumToString()
