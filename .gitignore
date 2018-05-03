@@ -60,3 +60,4 @@ _TeamCity*
 # Visual Studio code coverage results
 *.coverage
 *.coveragexml
+/GeeksForGeeks/packages/System.ValueTuple.4.3.1
