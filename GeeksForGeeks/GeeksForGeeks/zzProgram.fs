@@ -5,6 +5,5 @@
 module Program =
     [<EntryPoint>]
     let main argv = 
-        let numbers = Nbonacci.calculate 3 8
-        printfn "%A" numbers
+        LongestPalindrome.test()
         0 // return an integer exit code

@@ -59,7 +59,9 @@
     <None Include="App.config" />
     <Content Include="packages.config" />
     <Compile Include="Nbonacci.fs" />
-    <Compile Include="zzProgram.fs" />
+    <Compile Include="WordsGreaterThan.fs" />
+    <Compile Include="LongestPalindrome.fs" />
+    <Compile Include="ZZProgram.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
