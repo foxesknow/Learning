@@ -62,3 +62,5 @@ _TeamCity*
 *.coveragexml
 /GeeksForGeeks/packages/System.ValueTuple.4.3.1
 /Networking/.vs/Networking/v15/Server/sqlite3
+/MachineLearning/RandomForest/.vs/RandomForest/v15/Server/sqlite3
+/ClassLibrary1
