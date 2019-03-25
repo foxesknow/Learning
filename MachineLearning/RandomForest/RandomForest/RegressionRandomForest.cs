@@ -20,14 +20,15 @@ namespace RandomForest
             double prediction = 0;
             var predictionLock = new object();
 
-            Parallel.ForEach(m_Trees, (currentTree) =>
+            for(int i = 0; i < m_Trees.Count; i++)
             {
+                var currentTree = m_Trees[i];
                 var p = currentTree.Evaluate(data);
                 lock (predictionLock)
                 {
                     prediction += p;
                 }
-            });
+            }
 
             return prediction / m_Trees.Count;
         }

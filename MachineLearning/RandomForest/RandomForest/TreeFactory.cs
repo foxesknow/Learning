@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace RandomForest
 {
-    public class TreeFactory<TData, TScore>
+    public class TreeFactory<TData, TScore> : ITreeFactory<TData, TScore>
     {
         private readonly DataReaderFactory<TData> m_DataReaderFactory;
 
@@ -84,14 +84,14 @@ namespace RandomForest
             }
         }
 
-         private Func<TData, bool> MakeLessOrEqual(Func<TData, double> reader, double value)
-         {
-            return data => reader(data) <= value;
+        private Func<TData, bool> MakeLessOrEqual(Func<TData, double> reader, double value)
+        {
+        return data => reader(data) <= value;
          }
 
-         private Func<TData, bool> MakeGreaterThan(Func<TData, double> reader, double value)
-         {
+        private Func<TData, bool> MakeGreaterThan(Func<TData, double> reader, double value)
+        {
             return data => reader(data) > value;
-         }
+        }
     }
 }

@@ -8,9 +8,9 @@ namespace RandomForest
 {
     public class ForestLoader<TData, TScore>
     {
-        private readonly TreeFactory<TData, TScore> m_TreeFactory;
+        private readonly ITreeFactory<TData, TScore> m_TreeFactory;
 
-        public ForestLoader(TreeFactory<TData, TScore> treeFactory)
+        public ForestLoader(ITreeFactory<TData, TScore> treeFactory)
         {
             m_TreeFactory = treeFactory;
         }

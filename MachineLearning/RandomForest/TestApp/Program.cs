@@ -13,10 +13,18 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
+            RandomMain(args);
+        }
+
+        static void RandomMain(string[] args)
+        {
             using(XmlReader xmlReader = XmlReader.Create(@"F:\Code\RandomForest\RandomForest.Sample\RandomForest.Sample\regression_rf.pmml"))
             {
-                var dataReaderFactory = new DictionaryDataReaderFactory();
-                var treeFactory = new TreeFactory<IReadOnlyDictionary<string, double>, double>(dataReaderFactory);
+                //var dataReaderFactory = new DictionaryDataReaderFactory();
+                //var treeFactory = new TreeFactory<IReadOnlyDictionary<string, double>, double>(dataReaderFactory);
+
+                var dataReaderFactory = new ExpressionDictionaryDataReaderFactory();
+                var treeFactory = new ExpressionTreeFactory(dataReaderFactory);
 
                 var loader = new ForestLoader<IReadOnlyDictionary<string, double>, double>(treeFactory);
                 var trees = loader.Load(xmlReader);
