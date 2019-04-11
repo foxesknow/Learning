@@ -87,18 +87,22 @@ namespace Pipelines
                 }
             }
 
+            if(inQuote) throw new Exception($"the string is missing the terminator : {quoteBlockTerminator}");
+            if(inEscape) throw new Exception("incomplete escape sequence");
+            
+
             if(active.Length != 0)
             {
                 yield return new Token(TokenType.String, active);
             }
-            else
+            else if(lastToken == TokenType.None) 
             {
-                if(inQuote) throw new Exception($"the string is missing the terminator : {quoteBlockTerminator}");
-                if(inEscape) throw new Exception("incomplete escape sequence");
-                if(lastToken == TokenType.Pipe) throw new Exception("an empty pipe element is not allowed");
-
-                if(lastToken == TokenType.None) yield return new Token();
+                yield return new Token();
             }            
+            else if(lastToken == TokenType.Pipe) 
+            {
+                throw new Exception("an empty pipe element is not allowed");
+            }
 
             Token MakeAndReset(TokenType type)
             {
