@@ -40,7 +40,7 @@ namespace Pipelines
 
                     if(c == quoteBlockTerminator)
                     {
-                        yield return MakeAndReset(TokenType.String);
+                        yield return MakeAndReset(TokenType.QuotedText);
                         inQuote = false;
                         quoteBlockTerminator = '\0';
                         continue;
@@ -71,7 +71,7 @@ namespace Pipelines
 
                         if(c == Pipe)
                         {
-                            if(lastToken != TokenType.String) throw new Exception("unexpected pipe");
+                            if(lastToken != TokenType.String) throw new Exception("an empty pipe element is not allowed");
 
                             yield return MakeAndReset(TokenType.Pipe);
                             continue;
@@ -93,9 +93,11 @@ namespace Pipelines
             }
             else
             {
-                if(inQuote) throw new Exception("Unterminated string");
-                if(inEscape) throw new Exception("Unterminated escape sequence");
-                if(lastToken == TokenType.Pipe) throw new Exception("nothing to right of pipeline");
+                if(inQuote) throw new Exception($"the string is missing the terminator : {quoteBlockTerminator}");
+                if(inEscape) throw new Exception("incomplete escape sequence");
+                if(lastToken == TokenType.Pipe) throw new Exception("an empty pipe element is not allowed");
+
+                if(lastToken == TokenType.None) yield return new Token();
             }            
 
             Token MakeAndReset(TokenType type)
@@ -137,6 +139,10 @@ namespace Pipelines
             {
                 return $"String = [{this.Value}]";
             }
+            else if(this.Type == TokenType.QuotedText)
+            {
+                return $"Quoted = [{this.Value}]";
+            }
             else
             {
                 return this.Type.ToString();
@@ -148,6 +154,7 @@ namespace Pipelines
     {
         None,
         Pipe,
-        String
+        String,
+        QuotedText
     }
 }
