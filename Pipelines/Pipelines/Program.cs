@@ -10,12 +10,12 @@ namespace Pipelines
             try
             {
                 //Print(PipelineParser.Parse("dir *.txt"));
-                //Print(PipelineParser.Parse("dir | more"));
+                //Print(PipelineParser.Parse("dir\n | more"));
                 //Print(PipelineParser.Parse("dir|more"));
                 //Print(PipelineParser.Parse("  dir| \"hello`tthere\" "));
                 //Print(PipelineParser.Parse("dir *.txt | echo foo bar \"   1 2 3 4      \""));
-                //Print(PipelineParser.Parse("dir *.txt | more | top 5"));
-                Print(PipelineParser.Parse("                         "));
+                Print(PipelineParser.Parse("dir *.txt | more | top 5 | echo \"hello```nthere\""));
+                //Print(PipelineParser.Parse("dir \n\n | more"));
             }
             catch(Exception e)
             {

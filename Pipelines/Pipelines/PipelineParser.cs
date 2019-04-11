@@ -52,7 +52,7 @@ namespace Pipelines
                 {
                     if(c == Escape) throw new Exception("can only escape in quoted text");
 
-                    if(c == ' ')
+                    if(char.IsWhiteSpace(c))
                     {
                         if(active.Length != 0)
                         {
